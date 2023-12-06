@@ -3,7 +3,12 @@
     <ul>
         {% for item in items %}
             {% if item.pedido == pedido %}
-                <li>{{ item.cantidad }}x {{ item.producto.nombre }}</li>
+                <li>
+                    {{ item.cantidad }}x {{ item.producto.nombre }} 
+                    {% if item.tamano != "AC" %}
+                        {{ item.get_tamano_display }}
+                    {% endif %}
+                </li>
             {% endif %}
         {% endfor %}
     </ul>
