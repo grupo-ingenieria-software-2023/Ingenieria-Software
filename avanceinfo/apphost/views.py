@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.core.serializers import serialize
+import json
 from .models import *
 
 # Create your views here.
@@ -42,6 +43,7 @@ def menu(req):
     veganas = Producto.objects.filter(tipo__exact="VGN", disponible=True)
     acompanamientos = Producto.objects.filter(tipo__exact="ACO", disponible=True)
     datos = serialize("json", Producto.objects.filter(disponible=True))
+
     if req.method == "GET":
         return render(req, "menu.html", {
             'omnivoras': omnivoras,
@@ -50,8 +52,42 @@ def menu(req):
             'acompanamientos': acompanamientos,
             'datos': datos
         })
+
     elif req.method == "POST":
-        return render(req, "menu.html")
+        pedido = Pedido(direccion=req.POST.get("direccion"))
+        pedido.save()
+        for pk, cantidad in json.loads(req.POST.get("json_medianas")).items():
+            pizza = Producto.objects.get(pk=pk)
+            precio = pizza.precio_mediana * cantidad
+            fragmento = FragmentoPedido(
+                pedido = pedido,
+                producto = pizza,
+                cantidad = cantidad,
+                precio_total = precio
+            )
+            fragmento.save()
+        for pk, cantidad in json.loads(req.POST.get("json_familiares")).items():
+            pizza = Producto.objects.get(pk=pk)
+            precio = pizza.precio_familiar * cantidad
+            fragmento = FragmentoPedido(
+                pedido = pedido,
+                producto = pizza,
+                cantidad = cantidad,
+                precio_total = precio
+            )
+            fragmento.save()
+        for pk, cantidad in json.loads(req.POST.get("json_acompanamientos")).items():
+            acompanamiento = Producto.objects.get(pk=pk)
+            precio = acompanamiento.precio_unico * cantidad
+            fragmento = FragmentoPedido(
+                pedido = pedido,
+                producto = acompanamiento,
+                cantidad = cantidad,
+                precio_total = precio
+            )
+            fragmento.save()
+
+        return redirect("/")
 
 def agregar_producto(req):
     if req.method == "GET":
@@ -60,3 +96,6 @@ def agregar_producto(req):
         nuevo_producto = FormProducto(req.POST)
         nuevo_producto.save()
         return redirect("/")
+
+def lista_productos(req):
+    ...

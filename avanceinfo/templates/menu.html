@@ -16,8 +16,6 @@
         }
     </script>
 
-    
-
     <main class="contenedor">
         <nav class="nav__menu">
             <style>
@@ -29,14 +27,13 @@
             <p class="nav__menu__enlace" onclick="mostrar_tab('aco')">Acompañamientos</p>
         </nav>
 
-        <form>
+        <form method="POST">
+            {% csrf_token %}
+
             {% include "componentes/lista_pizzas.html" with productos=omnivoras titulo="Pizzas Omnívoras" precios_mult=True es_default=True id="omn" %}
             {% include "componentes/lista_pizzas.html" with productos=vegetarianas titulo="Pizzas Vegetarianas" precios_mult=True id="vgt" %}
             {% include "componentes/lista_pizzas.html" with productos=veganas titulo="Pizzas Veganas" precios_mult=True id="vgn" %}
             {% include "componentes/lista_pizzas.html" with productos=acompanamientos titulo="Acompañamientos" precios_mult=False id="aco" %}
-
-            <div class="contenedor separador">
-            </div>
 
             <script>
                 // pedidos, según tamaño y por ende precio
@@ -50,26 +47,26 @@
                     for (producto of temp_datos) {
                         datos[producto["pk"].toString()] = producto.fields;
                     }
+
+                    render_caja();
                 }
 
                 function modificar_pedido(id, tamano, agregar = true) {
                     id = id.toString();
                     let objeto_pedido = null;
                     if (tamano == "mediana") objeto_pedido = medianas;
-                    else if (tamano == "familiar") objeto_pedido = medianas;
+                    else if (tamano == "familiar") objeto_pedido = familiares;
                     else objeto_pedido = acompanamientos;
 
-                    let boton = document.getElementById(`boton-${id}`);
+                    let boton = document.getElementById(`boton-${id}-${tamano}`);
 
                     if (agregar) {
                         if (objeto_pedido[id] == undefined) objeto_pedido[id] = 1;
                         else objeto_pedido[id] += 1;
                     }
-                    else {
-                        if (objeto_pedido[id] != undefined) {
-                            objeto_pedido[id] -= 1;
-                            if (objeto_pedido[id] <= 0) delete objeto_pedido[id];
-                        }
+                    else if (objeto_pedido[id] != undefined) {
+                        objeto_pedido[id] -= 1;
+                        if (objeto_pedido[id] <= 0) delete objeto_pedido[id];
                     }
 
                     boton.value = objeto_pedido[id] ?? 0;
@@ -78,16 +75,73 @@
                 }
 
                 function render_caja() {
-                    console.log("Rendereando:");
-                    console.log(medianas);
-                    console.log(familiares);
-                    console.log(acompanamientos);
+                    let total = 0;
+                    let html_lista = "";
+                    for (let [pk, cantidad] of Object.entries(medianas)) {
+                        let pizza = datos[pk];
+                        let precio = pizza.precio_mediana * cantidad;
+                        total += precio;
+                        mensaje = `${cantidad}x ${pizza.nombre} ${cantidad > 1 ? "medianas" : "mediana"}: $${precio}`;
+                        html_lista += `<li>${mensaje}</li>`;
+                    }
+                    for (let [pk, cantidad] of Object.entries(familiares)) {
+                        let pizza = datos[pk];
+                        let precio = pizza.precio_familiar * cantidad;
+                        total += precio;
+                        mensaje = `${cantidad}x ${pizza.nombre} ${cantidad > 1 ? "familiares" : "familiar"}: $${precio}`;
+                        html_lista += `<li>${mensaje}</li>`;
+                    }
+                    for (let [pk, cantidad] of Object.entries(acompanamientos)) {
+                        let pizza = datos[pk];
+                        let precio = pizza.precio_unico * cantidad;
+                        total += precio;
+                        mensaje = `${cantidad}x ${pizza.nombre}: $${precio}`;
+                        html_lista += `<li>${mensaje}</li>`;
+                    }
+
+                    let DOMlista = document.getElementById("lista_pedido");
+                    if (html_lista != "") DOMlista.innerHTML = html_lista;
+                    else DOMlista.innerHTML = `<li>Aún no ordena nada</li>`;
+
+                    document.getElementById("precio").innerHTML = total;
+
+                    document.getElementById("json_medianas").value = JSON.stringify(medianas);
+                    document.getElementById("json_familiares").value = JSON.stringify(familiares);
+                    document.getElementById("json_acompanamientos").value = JSON.stringify(acompanamientos);
                 }
 
 
             </script>
             <div class="contenedor caja">
-                caja
+                <h3>CAJA</h3>
+                <div class="boleta">
+                    <ul id="lista_pedido">
+                    </ul>
+                </div>
+                <div class="pago">
+                    <p>
+                        <input hidden name="json_medianas" id="json_medianas">
+                        <input hidden name="json_familiares" id="json_familiares">
+                        <input hidden name="json_acompanamientos" id="json_acompanamientos">
+                        <b>Total (IVA incluido):</b> $<span id="precio">0</span>
+                    </p>
+                    <p>
+                        <b>Método de Pago:</b>
+                        <select name="metodo_pago">
+                            <option selected>WebPay</option>
+                            <option>CuentaRUT</option>
+                            <option>Efectivo Al Repartidor</option>
+                        </select>
+                    </p>
+                    <p class="legal">La Buena Pizza ofrece un canal SSL con WebPay etc. etc. esto es texto que debería escribir un abogado, pero debería describir cómo se va a procesar el pago para proveerle transparencia al cliente.</p>
+                </div>
+                <div class="continuar">
+                    <label><b>Dirección:</b></label>
+                    <input type="text" maxlength="300" name="direccion">
+                    <button class="boton">
+                        Simular Pago Existoso
+                    </button>
+                </diV>
             </div>
         </form>
     </main>

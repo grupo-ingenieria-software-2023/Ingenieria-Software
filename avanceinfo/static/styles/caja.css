@@ -1,3 +1,53 @@
 .caja {
     display: flex;
 }
+
+.contador {
+    display: flex;
+}
+.contador * {
+    border: 1px solid var(--secundario);
+    width: 3rem;
+    text-align: center;
+}
+.contador a:hover {
+    background-color: var(--secundario);
+    color: var(--blanco);
+}
+
+.contador input {
+    appearance: none;
+    -moz-appearance: textfield;
+}
+
+.contador a:first-child {
+    border-right: none;
+    border-radius: 30rem 0 0 30rem;
+}
+
+.contador a:last-child {
+    border-left: none;
+    border-radius: 0 30rem 30rem 0;
+}
+
+.caja {
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+}
+.caja button {
+    background-color: white;
+}
+.caja h3 {
+    text-align: center;
+    grid-column: span 3;
+    letter-spacing: 1rem;
+    width: 100%;
+}
+.caja li {
+    list-style: initial;
+}
+
+.caja .legal {
+    font-size: 80%;
+    color: darkgrey;
+}

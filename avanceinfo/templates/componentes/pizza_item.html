@@ -17,6 +17,23 @@
         {% endif %}
     </div>
     <div class="menu__info__pagar">
-        <a href="" class="boton">Pide aquí</a>
+        {% if precios_mult %}
+            <div class="contador">
+                <a onclick="modificar_pedido({{ pizza.pk }}, 'mediana', false)">-</a>
+                <input autocomplete="off" disabled type="number" value="0" id="boton-{{ pizza.pk }}-mediana" name="boton-{{ pizza.pk }}-mediana">
+                <a onclick="modificar_pedido({{ pizza.pk }}, 'mediana')">+</a>
+            </div>
+            <div class="contador">
+                <a onclick="modificar_pedido({{ pizza.pk }}, 'familiar', false)">-</a>
+                <input autocomplete="off" disabled type="number" value="0" id="boton-{{ pizza.pk }}-familiar" name="boton-{{ pizza.pk }}-familiar">
+                <a onclick="modificar_pedido({{ pizza.pk }}, 'familiar')">+</a>
+            </div>
+        {% else %}
+            <div class="contador">
+                <a onclick="modificar_pedido({{ pizza.pk }}, 'acompanamiento', false)">-</a>
+                <input autocomplete="off" disabled type="number" value="0" id="boton-{{ pizza.pk }}-acompanamiento" name="boton-{{ pizza.pk }}-acompanamiento">
+                <a onclick="modificar_pedido({{ pizza.pk }}, 'acompanamiento')">+</a>
+            </div>
+        {% endif %}
     </div>
 </div>

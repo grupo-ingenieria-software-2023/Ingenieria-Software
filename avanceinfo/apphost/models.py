@@ -40,8 +40,8 @@ class Pedido(models.Model):
         choices = ESTADO,
         default = ESTADO[0][0]
     )
-    fecha_inicio = models.DateTimeField()
-    fecha_completada = models.DateTimeField()
+    fecha_inicio = models.DateTimeField(auto_now_add=True)
+    fecha_completada = models.DateTimeField(null=True)
     direccion = models.CharField(max_length=300)
 
 class FragmentoPedido(models.Model):
