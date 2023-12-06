@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    {% include "componentes/default_head.html" %}
+</head>
+<body>
+    {% include "componentes/header.html" %}
+
+    <main class="contenedor">
+        
+        <h3 class="centrar-texto">Contáctanos</h3>
+
+        <div class="contacto_bg"></div>
+
+        <form class="formulario" method="POST">
+            {% csrf_token %}
+            <div class="campo">
+                <label class="campo__label" for="nombre">Nombre</label>
+                <input class="campo__field" type="text" placeholder="Nombre" name="nombre" id="nombre">
+            </div>
+            <div class="campo">
+                <label class="campo__label" for="edad">Edad</label>
+                <input class="campo__field" type="number" placeholder="Edad" name="edad" id="edad">
+            </div>
+            <div class="campo">
+                <label class="campo__label" for="email">Email</label>
+                <input class="campo__field" type="email" placeholder="Email" name="email" id="email">
+            </div>
+            <div class="campo">
+                <label class="campo__label" for="fono">Teléfono</label>
+                <input class="campo__field" type="number" placeholder="Teléfono" name="fono" id="fono">
+            </div>
+            <div class="campo">
+                <label class="campo__label" for="mensaje">Mensaje</label>
+                <textarea class="campo__field campo__field--textarea" name="mensaje" id="mensaje" cols="30" rows="10"></textarea>
+            </div>
+            <div class="campo">
+                <input type="submit" value="Enviar" class="boton boton--contacto">
+            </div>
+        </form>
+
+        <div class="contenedor_grid centrar-texto">
+            <div>
+                <h3 class="no-margin">Nuestro local</h3>
+                <ul class="lista_contacto">
+                    <li>Donald Canter 3699, Valdivia, Región de Los Ríos</li>
+                    <li>contacto@labuenapizza.cl</li>
+                    <li><a href="https://api.whatsapp.com/message/AWNC2WELBXAAG1?autoload=1&app_absent=0" target="_blank">+56 9 9504 9329</a></li>
+                    <li><a href="https://www.facebook.com/labuenapizzavaldivia/" target="_blank">@labuenapizzavaldivia</a></li>
+                    <li><a href="https://www.instagram.com/labuenapizza/" target="_blank">@labuenapizza</a></li>
+                </ul>
+            </div>
+            <div>
+                <iframe class="mapa" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8665.86580565019!2d-73.21215566231221!3d-39.83286499654298!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9615ef68bba28873%3A0x4d3d33cfdc80b7a5!2sLa%20Buena%20Pizza!5e0!3m2!1ses!2sus!4v1698105469509!5m2!1ses!2sus"  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </main>
+
+    {% include 'componentes/footer.html' %}
+</body>
+</html>

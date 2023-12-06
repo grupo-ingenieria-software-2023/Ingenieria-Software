@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    {% include "componentes/default_head.html" %}
+</head>
+<body>
+    {% include "componentes/header.html" %}
+
+    <style>
+        form button {
+            background: none;
+            grid-column: span 2;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 20px;
+        }
+
+        form.contenedor {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: 200px 350px;
+            width: fit-content;
+            row-gap: 5px;
+        }
+    </style>
+
+    <form method="POST" class="contenedor separador">
+        {% csrf_token %}
+        {{ form_producto }}
+        <button class="boton">Agregar</button>
+    </form>
+    
+    {% include "componentes/footer.html" %}   
+</body>
+</html>

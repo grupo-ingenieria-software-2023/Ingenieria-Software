@@ -1,0 +1,24 @@
+{% load static %}
+
+<div class="contenedor__menu tab" {{ es_default|yesno:",hidden" }} id={{ id }}>
+    {% if productos|length > 0 %}
+        <div class="menu__info">
+            <h2 class="menu__info__titulo">{{ titulo }}</h2>
+
+            <div class="menu__info__tamaños">
+                {% if precios_mult %}
+                    <p>Mediana</p>
+                    <p>Familiar</p>
+                {% else %}
+                    <p>Precio</p>
+                {% endif %}
+            </div>
+            
+            {% for pizza in productos %}
+                {% include "componentes/pizza_item.html" with pizza=pizza %}
+            {% endfor %}
+        </div>
+    {% else %}
+        Disculpas. No se ofrecen {{ titulo|lower }} en este momento.
+    {% endif %}
+</div>

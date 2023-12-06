@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    {% include "default_head.html" %}
+</head>
+<body>
+    {% include "header.html" %}
+
+    <main class="contenedor">
+        <nav class="nav__menu">
+            <p class="nav__menu__enlace">Pizzas Omnivoras</p>
+            <p class="nav__menu__enlace">Pizzas Vegetarianas</p>
+            <p class="nav__menu__enlace">Pizzas Veganas</p>
+            <p class="nav__menu__enlace">Acompañamientos</p>
+        </nav>
+
+        <div class="contenedor__menu">
+            <div class="menu__info">
+                <h2 class="menu__info__titulo">Pizzas Omnivoras</h2>
+
+                <div class="menu__info__tamaños">
+                    <p>Mediana</p>
+                    <p>Familiar</p>
+                </div>
+                
+                <img class="menu__info__img" src="{% static 'img/camaron_parmesano.jpg' %}" alt="Pizza de camaron parmesano">
+                
+                <div class="menu__info__descripcion">
+                    <h3>Camarón Parmesano</h3>
+                    <p>Salsa de tomates / Queso Mantecoso/ Cebollín / Camarones / Queso Parmesano</p>
+                </div>
+
+                <div class="menu__info__compra">
+                    <div class="menu__info__precios">
+                        <p>$15.490</p>
+                        <p>$20.490</p>
+                    </div>
+                    <div class="menu__info__pagar">
+                        <a href="" class="boton">Pide aquí</a>
+                        <p>
+                            <svg class="svg__carrito" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="50" height="50" viewBox="0 0 24 24" stroke-width="1.5" stroke="#F1A01F" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                <path d="M17 17h-11v-14h-2" />
+                                <path d="M6 5l14 1l-1 7h-13" />
+                              </svg>
+                        </p>
+                    </div>
+                </div>
+            </div>
+    </main>
+
+    {% include "footer.html" %}    
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    {% include "componentes/default_head.html" %}
+</head>
+<body>
+    {% include "componentes/header.html" %}
+
+    <div class="contenedor contenido_principal">
+        <main class="blog">
+            <h3>Nuestras pizzas más pedidas</h3>
+
+            <section class="entrada">
+                <div class="entrada_img">
+                    <img src="{% static 'img/nopolitana.jpg' %}" alt="Imagen Nopolitana">
+                </div>
+                <div class="entrada_contenido">
+                    <h4 class="no-margin">#1° Nopolitana</h4>
+                    <p>Salsa de tomates / Queso Mantecoso / Tomates / Tocino</p>
+                    <a href="#" class="boton">Pide Aquí</a>
+                </div>
+            </section> <!-- Fin entrada -->
+
+            <section class="entrada">
+                <div class="entrada_img">
+                    <img src="{% static 'img/extramechada.jpg' %}" alt="Imagen Extramechada">
+                </div>
+                <div class="entrada_contenido">
+                    <h4 class="no-margin">#2° Extramechada</h4>
+                    <p>Salsa de tomates / Queso Mantecoso / Tomates / Cebolla Morada / Extra Mechada​</p>
+                    <a href="#" class="boton">Pide Aquí</a>
+                </div>
+            </section> <!-- Fin entrada -->
+
+            <section class="entrada">
+                <div class="entrada_img">
+                    <img loading="lazy" src="{% static 'img/pollo_pesto.jpg' %}" alt="Imagen Pollo Pesto">
+                </div>
+                <div class="entrada_contenido">
+                    <h4 class="no-margin">#3° Pollo Pesto</h4>
+                    <p>Salsa de tomates / Queso Mantecoso / Pollo / Choclo / Pesto de Albahaca</p>
+                    <a href="#" class="boton">Pide Aquí</a>
+                </div>
+            </section> <!-- Fin entrada -->
+
+            <section class="entrada">
+                <div class="entrada_img">
+                    <img loading="lazy" src="{% static 'img/pollo_bbq_2.jpg' %}" alt="Imagen Pollo BBQ">
+                </div>
+                <div class="entrada_contenido">
+                    <h4 class="no-margin">#4° Pollo BBQ</h4>
+                    <p>Salsa BBQ / Queso Mantecoso / Pollo / Cebollín / Tocino</p>
+                    <a href="#" class="boton">Pide Aquí</a>
+                </div>
+            </section> <!-- Fin entrada -->
+
+            <section class="entrada">
+                <div class="entrada_img">
+                    <img loading="lazy" src="{% static 'img/extraqueso_salame.jpg' %}" alt="Imagen Extraqueso Salame">
+                </div>
+                <div class="entrada_contenido">
+                    <h4 class="no-margin">#5° Extraqueso Salame</h4>
+                    <p>Salsa de tomates / Extra Queso Mantecoso / Salame</p>
+                    <a href="#" class="boton">Pide Aquí</a>
+                </div>
+            </section> <!-- Fin entrada -->
+
+        </main>
+        
+        <aside class="sidebar">
+            <p class="sidebar_texto sidebar_texto--color no-margin">Bienvenidos a una nueva experiencia</p>
+            <h3 class="sidebar_titulo no-margin">¡ Haz tu pedido online !</h3>
+            <p class="sidebar_parrafo">Haz click abajo y pide tu pizza favorita para retiro en local o con reparto a domicilio y disfruta de una experiencia de sabores única.</p>
+            <a class="boton" href="">Pide aquí</a>
+        </aside>
+
+    </div>
+
+    {% include "componentes/footer.html" %}   
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    {% include "componentes/default_head.html" %}
+</head>
+<body>
+    {% include "componentes/header.html" %}
+
+    <div class="contenedor">
+        <main>
+            <h3 class="centrar-texto">Sobre Nosotros</h3>
+
+            <div class="separador">
+                <img class="redondear-img" src="{% static 'img/hero8.jpg' %}" alt="Caja de pizza">
+                <p  class="nosotros_texto interlineado">          
+                    «¡Hola! Soy Vicente, y junto con Daniela, fundamos La Buena Pizza en el año 2020 con una misión clara: ofrecer una experiencia que represente «La Buena Vida». Desde entonces, nos hemos dedicado incansablemente a perfeccionar nuestro trabajo y transmitir esa energía positiva que nos define en cada pizza que elaboramos y en cada interacción con nuestros clientes.
+            
+                    Nuestra pasión por lo que hacemos se refleja en cada detalle. Hemos invertido tiempo y esfuerzo en estudiar y optimizar cada aspecto de nuestro proceso, desde la selección de los ingredientes hasta la preparación cuidadosa de cada pizza. Queremos asegurarnos de que cada bocado sea una explosión de sabores y una experiencia única.
+                    Pero en La Buena Pizza no solo nos enfocamos en la calidad de nuestros productos, sino también en crear un ambiente acogedor y lleno de alegría. Queremos que cada uno de nuestros colaboradores se sienta en un gran lugar de trabajo, donde puedas disfrutar de buena compañía y buenos momentos.
+                    Nos enorgullece ver cómo nuestras pizzas han conquistado los paladares de nuestra comunidad y cómo nos hemos convertido en un lugar de referencia para aquellos que buscan una experiencia gastronómica excepcional.
+                    Te invitamos a sumergirte en la verdadera «Buena Vida» a través de nuestras pizzas. Permítenos deleitarte con nuestro servicio excepcional y contagiarte de nuestra pasión por crear experiencias gastronómicas inolvidables.
+                    En La Buena Pizza, nuestra meta es brindarte una experiencia más allá de lo común. Queremos que sientas que estás disfrutando de un pedacito de la «Buena Vida» en cada pizza que pruebas. Así que ven y únete a nosotros en este viaje culinario donde el sabor y la pasión se fusionan para crear momentos memorables.
+                    Te esperamos con los brazos abiertos para compartir contigo nuestra dedicación, nuestro amor por la cocina y nuestra convicción de que la pizza puede ser mucho más que una simple comida. ¡Bienvenido a La Buena Pizza, donde la «Buena Vida» se sirve en cada rebanada!»
+                </p>
+            </div>
+
+            <div class="contenedor_grid separador">
+                <div>
+                    <h3 class="no-margin centrar-texto">Conoce nuestras pizzas</h3>
+                    <p class="interlineado">          
+                        En La Buena Pizza, nuestras exquisitas pizzas artesanales son cuidadosamente elaboradas con ingredientes seleccionados de la más alta calidad. Nos enfocamos en preservar y resaltar las propiedades organolépticas de cada ingrediente, logrando un equilibrio perfecto de sabores. Utilizando métodos tradicionales y técnicas artesanales, horneamos cada pizza para obtener una corteza dorada y crujiente, junto con un interior suculento. Nuestro compromiso y pasión se reflejan en cada bocado, ofreciendo una experiencia gastronómica única y memorable. Te invitamos a disfrutar de nuestras pizzas artesanales, creadas con amor y dedicación, que te transportarán a un mundo de sabores inolvidables.
+                    </p>
+                    <img class="redondear-img" src="{% static 'img/hero6.jpg' %}" alt="Caja de pizza">
+                </div>
+
+                <div>
+                    <h3 class="no-margin centrar-texto">Consumo Local</h3>
+                    <p class="interlineado">          
+                        Hemos elegido cuidadosamente productos locales que promueven el comercio y la producción de nuestra ciudad. Utilizamos harinas, levaduras y quesos de la zona para brindar lo mejor de Valdivia en cada una de nuestras pizzas, contribuyendo así al consumo y desarrollo local.
+                    </p>
+                    <img class="redondear-img" src="{% static 'img/hero3.jpg' %}" alt="Caja de pizza">
+                </div>
+            </div>
+
+            <div class="contenedor_grid separador lista_puntos">
+                <style>
+                    .lista_puntos li { list-style: initial; }
+                </style>
+                <div>
+                    <h3 class="no-margin centrar-texto">Políticas de Envío</h3>
+                    <ul>
+                        <li>Se hacen envíos a toda la ciudad, el valor a pagar dependerá de cuántos kilómetros haya desde el local hasta el domicilio del cliente</li>
+                        <li>Si el camino hacia el domicilio está en mal estado, ya sea por ripio o gran cantidad de agujeros en el asfalto se cobrará una cantidad extra</li>
+                        <li>No se harán envíos a aquellos domicilios que se encuentren a más de 15km del local</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="no-margin centrar-texto">Políticas de Devolución</h3>
+                    <ul>
+                        <li>Si la Pizza llega en mal estado al domicilio del cliente por malas maniobras del repartidor se le hará envío de una nueva Pizza completamente gratis</li>
+                        <li>Si el cliente encuentra que la Pizza está poco cocida o encuentra que está quemada, se le hará envío de una nueva Pizza o se le ofrecerá un descuento en la siguiente compra</li>
+                        <li>Si al cliente se le envía una Pizza distinta a la que ordenó se le  hará envio de la Pizza correcta completamente grátis, sin tener que devolver la anterior</li>
+                        <li>El local está dispuesto a reponer cada Pizza que no cumpla las expectativas del cliente, siempre y cuando sea responsabilidad del local</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="contenedor_grid centrar-texto">
+                <div>
+                    <h3 class="no-margin">Contáctanos</h3>
+                    <ul class="lista_contacto">
+                        <li>Donald Canter 3699, Valdivia, Región de Los Ríos</li>
+                        <li>contacto@labuenapizza.cl</li>
+                        <li><a href="https://api.whatsapp.com/message/AWNC2WELBXAAG1?autoload=1&app_absent=0" target="_blank">+56 9 9504 9329</a></li>
+                        <li><a href="https://www.facebook.com/labuenapizzavaldivia/" target="_blank">@labuenapizzavaldivia</a></li>
+                        <li><a href="https://www.instagram.com/labuenapizza/" target="_blank">@labuenapizza</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <iframe class="mapa" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8665.86580565019!2d-73.21215566231221!3d-39.83286499654298!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9615ef68bba28873%3A0x4d3d33cfdc80b7a5!2sLa%20Buena%20Pizza!5e0!3m2!1ses!2sus!4v1698105469509!5m2!1ses!2sus"  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    {% include "componentes/footer.html" %}   
+</body>
+</html>
