@@ -1,0 +1,21 @@
+main {
+    padding-top: 4rem;
+}
+
+main > div {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2rem;
+    width: 100%;
+}
+
+main h4 {
+    width: 100%;
+}
+
+.pedido {
+    width: 35rem;
+    border: 1px solid darkgrey;
+    border-radius: 5rem;
+    padding: 2rem 4rem;
+}

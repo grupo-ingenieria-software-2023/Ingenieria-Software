@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    {% include "componentes/default_head.html" %}
+    <link rel="stylesheet" href="{% static 'styles/pedidos.css' %}">
+</head>
+<body>
+    {% include "componentes/header.html" %}
+
+    <main class="contenedor">
+        <div>
+            <h4>Por cocinar:</h4>
+            {% for pendiente in pendientes %}
+                {% include "componentes/pedido.html" with pedido=pendiente items=items %}
+            {% endfor %}
+        </div>
+
+        <div>
+            <h4>En envío:</h4>
+            {% for enviado in enviados %}
+                {% include "componentes/pedido.html" with pedido=enviado items=items %}
+            {% endfor %}
+        </div>
+    </main>
+
+    {% include "componentes/footer.html" %}   
+</body>
+</html>

@@ -63,7 +63,8 @@ def menu(req):
                 pedido = pedido,
                 producto = pizza,
                 cantidad = cantidad,
-                precio_total = precio
+                precio_total = precio,
+                tamano = "MD"
             )
             fragmento.save()
         for pk, cantidad in json.loads(req.POST.get("json_familiares")).items():
@@ -73,7 +74,8 @@ def menu(req):
                 pedido = pedido,
                 producto = pizza,
                 cantidad = cantidad,
-                precio_total = precio
+                precio_total = precio,
+                tamano = "FM"
             )
             fragmento.save()
         for pk, cantidad in json.loads(req.POST.get("json_acompanamientos")).items():
@@ -83,7 +85,8 @@ def menu(req):
                 pedido = pedido,
                 producto = acompanamiento,
                 cantidad = cantidad,
-                precio_total = precio
+                precio_total = precio,
+                tamano = "AC"
             )
             fragmento.save()
 
@@ -99,3 +102,27 @@ def agregar_producto(req):
 
 def lista_productos(req):
     ...
+
+def pedidos(req):
+    modo = req.GET.get("modo")
+    pk = req.GET.get("pk")
+    if modo and pk:
+        pedido = Pedido.objects.get(pk=pk)
+        if pedido:
+            if modo == "enviar":
+                pedido.estado = "EN" 
+            elif modo == "recibir":
+                pedido.estado = "RC" 
+            elif modo == "cancelar":
+                pedido.estado = "CN"
+        pedido.save()
+
+    pendientes = Pedido.objects.filter(estado="PD")
+    enviados = Pedido.objects.filter(estado="EN")
+    items = FragmentoPedido.objects.filter(pedido__estado__in=["PD", "EN"]).order_by("tamano").order_by("pedido")
+
+    return render(req, "pedidos.html", {
+        'pendientes': pendientes,
+        'enviados': enviados,
+        'items': items
+    })  

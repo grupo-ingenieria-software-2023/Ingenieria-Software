@@ -32,20 +32,31 @@ class Pedido(models.Model):
         ("PG", "No pagado"),
         ("PD", "Pendiente"),
         ("EN", "Enviado"),
-        ("RC", "Recibido")
+        ("RC", "Recibido"),
+        ("CN", "Cancelado")
     ]
 
     estado = models.CharField(
         max_length = 2,
         choices = ESTADO,
-        default = ESTADO[0][0]
+        default = ESTADO[1][0]
     )
     fecha_inicio = models.DateTimeField(auto_now_add=True)
     fecha_completada = models.DateTimeField(null=True)
     direccion = models.CharField(max_length=300)
 
 class FragmentoPedido(models.Model):
+    TAMANOS = [
+        ("MD", "Mediana"),
+        ("FM", "Familiar"),
+        ("AC", "Acompañamiento")
+    ]
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     producto = models.ForeignKey(Producto, on_delete=models.SET_NULL, null=True)
     cantidad = models.IntegerField()
+    tamano  = models.CharField(
+        max_length = 2,
+        choices = TAMANOS,
+        default = TAMANOS[0][0]
+    )
     precio_total = models.DecimalField(max_digits=20, decimal_places=2)

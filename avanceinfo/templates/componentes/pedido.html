@@ -1,0 +1,17 @@
+<div class="pedido">
+    <b>Enviar a:</b> {{ pedido.direccion }}
+    <ul>
+        {% for item in items %}
+            {% if item.pedido == pedido %}
+                <li>{{ item.cantidad }}x {{ item.producto.nombre }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    {% if pedido.estado == "PD" %}
+        <a href="pedidos?modo=enviar&pk={{ pedido.pk }}">Preparado</a>
+    {% else %}
+        <a href="pedidos?modo=recibir&pk={{ pedido.pk }}">Recibido</a>
+    {% endif %}
+        <a href="pedidos?modo=cancelar&pk={{ pedido.pk }}">Cancelar</a>
+</div>

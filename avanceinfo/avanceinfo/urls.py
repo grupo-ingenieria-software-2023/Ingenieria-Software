@@ -26,5 +26,6 @@ urlpatterns = [
     path('contacto', apphost.contacto),
     path('nosotros', lambda req: render(req, "nosotros.html")),
     path('agregar_producto', apphost.agregar_producto),
+    path('pedidos', apphost.pedidos),
     path('admin/', admin.site.urls),
 ]
