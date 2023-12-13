@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    {% include "componentes/default_head.html" %}
+    <link rel="stylesheet" href="{% static 'styles/form_trabajador.css' %}">
+</head>
+<body>
+    {% include "componentes/header.html" %}
+
+    <style>
+        
+    </style>
+    <form class="contenedor trabajador" method="POST">
+        {% csrf_token %}
+        {{ login_form }}
+        <button>Ingresar</button>
+    </form>
+
+    {% include "componentes/footer.html" %}   
+</body>
+</html>

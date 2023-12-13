@@ -14,9 +14,9 @@
     </ul>
 
     {% if pedido.estado == "PD" %}
-        <a href="pedidos?modo=enviar&pk={{ pedido.pk }}">Preparado</a>
+        <a href="pedidos/enviar/{{ pedido.pk }}">Preparado</a>
     {% else %}
-        <a href="pedidos?modo=recibir&pk={{ pedido.pk }}">Recibido</a>
+        <a href="pedidos/recibir/{{ pedido.pk }}">Recibido</a>
     {% endif %}
-        <a href="pedidos?modo=cancelar&pk={{ pedido.pk }}">Cancelar</a>
+    <a href="pedidos/cancelar/{{ pedido.pk }}">Cancelar</a>
 </div>

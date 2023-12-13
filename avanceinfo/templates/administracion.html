@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    {% include "componentes/default_head.html" %}
+    <link rel="stylesheet" href="{% static 'styles/form_trabajador.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/administracion.css' %}">
+</head>
+<body>
+    {% include "componentes/header.html" %}
+
+    <main class="contenedor">
+        <section class="productos">
+            <h2>Productos</h2>
+            <ul>
+                {% for producto in productos %}
+                <li><b>{{producto.nombre}}:</b> {{ producto.get_tipo_display }}, 
+                    {% if producto.tipo == "ACO" %} ${{producto.precio_unico|floatformat:"g"}}
+                    {% else %} ${{producto.precio_mediana|floatformat:"g"}}/${{producto.precio_familiar|floatformat:"g"}}
+                    {% endif %}
+                    <a href="eliminar_producto/{{producto.pk}}">Descontinuar</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+
+        <section class="trabajadores">
+            <h2>Trabajadores</h2>
+            <form id="nuevo_trabajador" action="nuevo_trabajador" class="trabajador" method="POST">
+                {% csrf_token %}
+                {{ form_trabajador }}
+                <button>Crear Trabajador</button>
+            </form>
+            <div id="lista_trabajadores">
+                <ul>
+                    {% for trabajador in trabajadores %}
+                        <li><b>RUT:</b> {{ trabajador.rut }} - <a href="eliminar_trabajador/{{trabajador.rut}}">Eliminar</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    {% include 'componentes/footer.html' %}
+</body>
+</html>

@@ -32,7 +32,8 @@
 
 .caja {
     display: grid;
-    grid-template-columns: 30% 40% 30%;
+    grid-template-columns: 28% 40% 28%;
+    column-gap: 2%;
 }
 .caja button {
     background-color: white;
@@ -50,4 +51,13 @@
 .caja .legal {
     font-size: 80%;
     color: darkgrey;
+    text-align: justify;
+}
+
+.caja .continuar {
+    text-align: center;
+}
+.caja .continuar button.boton {
+    margin: 8px auto 0 auto;
+
 }

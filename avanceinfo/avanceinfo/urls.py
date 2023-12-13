@@ -25,7 +25,13 @@ urlpatterns = [
     path('menu', apphost.menu),
     path('contacto', apphost.contacto),
     path('nosotros', lambda req: render(req, "nosotros.html")),
+    path('login', apphost.login),
     path('agregar_producto', apphost.agregar_producto),
+    path('administrar', apphost.administrar),
+    path('nuevo_trabajador', apphost.nuevo_trabajador),
+    path('eliminar_trabajador/<int:rut>', apphost.eliminar_trabajador),
+    path('eliminar_producto/<int:pk>', apphost.eliminar_producto),
     path('pedidos', apphost.pedidos),
+    path('pedidos/<modo>/<int:pk>', apphost.pedidos),
     path('admin/', admin.site.urls),
 ]

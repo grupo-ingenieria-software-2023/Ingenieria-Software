@@ -77,25 +77,26 @@
                 function render_caja() {
                     let total = 0;
                     let html_lista = "";
+                    let locale = "en-US";
                     for (let [pk, cantidad] of Object.entries(medianas)) {
                         let pizza = datos[pk];
                         let precio = pizza.precio_mediana * cantidad;
                         total += precio;
-                        mensaje = `${cantidad}x ${pizza.nombre} ${cantidad > 1 ? "medianas" : "mediana"}: $${precio}`;
+                        mensaje = `${cantidad}x ${pizza.nombre} ${cantidad > 1 ? "medianas" : "mediana"}: $${precio.toLocaleString(locale)}`;
                         html_lista += `<li>${mensaje}</li>`;
                     }
                     for (let [pk, cantidad] of Object.entries(familiares)) {
                         let pizza = datos[pk];
                         let precio = pizza.precio_familiar * cantidad;
                         total += precio;
-                        mensaje = `${cantidad}x ${pizza.nombre} ${cantidad > 1 ? "familiares" : "familiar"}: $${precio}`;
+                        mensaje = `${cantidad}x ${pizza.nombre} ${cantidad > 1 ? "familiares" : "familiar"}: $${precio.toLocaleString(locale)}`;
                         html_lista += `<li>${mensaje}</li>`;
                     }
                     for (let [pk, cantidad] of Object.entries(acompanamientos)) {
                         let pizza = datos[pk];
                         let precio = pizza.precio_unico * cantidad;
                         total += precio;
-                        mensaje = `${cantidad}x ${pizza.nombre}: $${precio}`;
+                        mensaje = `${cantidad}x ${pizza.nombre}: $${precio.toLocaleString(locale)}`;
                         html_lista += `<li>${mensaje}</li>`;
                     }
 
@@ -103,7 +104,7 @@
                     if (html_lista != "") DOMlista.innerHTML = html_lista;
                     else DOMlista.innerHTML = `<li>Aún no ordena nada</li>`;
 
-                    document.getElementById("precio").innerHTML = total;
+                    document.getElementById("precio").innerHTML = total.toLocaleString(locale);
 
                     document.getElementById("json_medianas").value = JSON.stringify(medianas);
                     document.getElementById("json_familiares").value = JSON.stringify(familiares);
@@ -136,11 +137,14 @@
                     <p class="legal">La Buena Pizza ofrece un canal SSL con WebPay etc. etc. esto es texto que debería escribir un abogado, pero debería describir cómo se va a procesar el pago para proveerle transparencia al cliente.</p>
                 </div>
                 <div class="continuar">
-                    <label><b>Dirección:</b></label>
-                    <input type="text" maxlength="300" minlength="5" name="direccion">
+                    <label><b>*Dirección:</b></label>
+                    <input type="text" maxlength="300" minlength="5" name="direccion" required>
                     <button class="boton">
                         Simular Pago Existoso
                     </button>
+                    <p class="legal">
+                        * Repartos limitados a Valdivia. La Buena Pizza no se hace responsable por pedidos de exterior.
+                    </p>
                 </diV>
             </div>
         </form>

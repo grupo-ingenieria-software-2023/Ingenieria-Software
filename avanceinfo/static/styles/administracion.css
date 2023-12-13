@@ -1,0 +1,21 @@
+main.contenedor {
+    display: grid;
+    grid-template-columns: 49% 49%;
+    column-gap: 2%;
+    row-gap: 3rem;
+    margin: 2rem auto;
+}
+
+section {
+    border: 1px solid gray;
+    overflow: hidden;
+}
+
+section.historial {
+    grid-column: span 2;
+}
+
+section h2 {
+    text-align: center;
+    margin: 1rem 0 0 2rem;
+}

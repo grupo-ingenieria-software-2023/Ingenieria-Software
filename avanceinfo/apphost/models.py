@@ -1,5 +1,5 @@
 from django.db import models
-from django.forms import ModelForm
+from django.forms import ModelForm, PasswordInput
 
 # Create your models here.
 class Producto(models.Model):
@@ -60,3 +60,17 @@ class FragmentoPedido(models.Model):
         default = TAMANOS[0][0]
     )
     precio_total = models.DecimalField(max_digits=20, decimal_places=2)
+
+class Trabajador(models.Model):
+    rut = models.IntegerField(unique=True)
+    password = models.CharField(max_length=30)
+
+class FormTrabajador(ModelForm):
+    class Meta:
+        model = Trabajador
+        fields = ["rut", "password"]
+        labels = {
+            'rut': 'RUT (sin guión o puntos):',
+            'password': 'Contraseña:'
+        }
+        widgets = {'password': PasswordInput()}

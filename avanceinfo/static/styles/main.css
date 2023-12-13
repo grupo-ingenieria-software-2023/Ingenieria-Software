@@ -96,11 +96,12 @@ li {
 
 .header {
     background-image: url(../img/hero.jpg);
-    height: 60rem;
+    height: 30rem;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     position: relative; /* Para que el filtro haga efecto, debe estar como relative, asi funcionara el position absolute de abajo*/
+    overflow-y: hidden;
 }
 
 .header_contenido {
@@ -118,7 +119,7 @@ li {
 
 @media (min-width: 780px) {
     .header_texto {
-        margin-top: 10rem;
+        margin-top: 0rem;
     }
 }
 

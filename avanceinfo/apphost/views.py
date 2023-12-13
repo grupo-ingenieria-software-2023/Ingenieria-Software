@@ -92,6 +92,36 @@ def menu(req):
 
         return redirect("/")
 
+## Requieren login:
+LOGUEADO = "logueado"
+def login(req):
+    if (req.method != "POST"):
+        if (req.session.get(LOGUEADO)):
+            req.session.pop(LOGUEADO)
+        return render(req, "login.html", {'login_form': FormTrabajador()})
+    else:
+        try:
+            trabajador = Trabajador.objects.get(rut=req.POST.get("rut"))
+        except Trabajador.DoesNotExist:
+            trabajador = None
+
+        PERMITIR_ADMIN = False
+        if ((PERMITIR_ADMIN and req.POST.get("password") == "admin") or (trabajador and trabajador.password == req.POST.get("password"))):
+            req.session[LOGUEADO] = True
+            return redirect("/")
+        else:
+            return render(req, "login.html", {'login_form': FormTrabajador()})
+
+def requiere_login(vista):
+    def wrapper(req, *args, **kwargs):
+        print(req.session.get(LOGUEADO))
+        if (req.session.get(LOGUEADO)):
+            return vista(req, *args, **kwargs)
+        else:
+            return redirect("/login")
+    return wrapper
+
+@requiere_login
 def agregar_producto(req):
     if req.method == "GET":
         return render(req, "agregar_producto.html", { 'form_producto': FormProducto() })
@@ -100,22 +130,19 @@ def agregar_producto(req):
         nuevo_producto.save()
         return redirect("/")
 
-def lista_productos(req):
-    ...
-
-def pedidos(req):
-    modo = req.GET.get("modo")
-    pk = req.GET.get("pk")
+@requiere_login
+def pedidos(req, modo=None, pk=None):
     if modo and pk:
         pedido = Pedido.objects.get(pk=pk)
         if pedido:
-            if modo == "enviar":
+            if modo == "enviar" and pedido.estado == "PD":
                 pedido.estado = "EN" 
-            elif modo == "recibir":
-                pedido.estado = "RC" 
-            elif modo == "cancelar":
+            elif modo == "recibir" and pedido.estado == "EN":
+                pedido.estado = "RC"
+            elif modo == "cancelar" and pedido.estado != "RC":
                 pedido.estado = "CN"
         pedido.save()
+        return redirect("/pedidos")
 
     pendientes = Pedido.objects.filter(estado="PD")
     enviados = Pedido.objects.filter(estado="EN")
@@ -125,4 +152,44 @@ def pedidos(req):
         'pendientes': pendientes,
         'enviados': enviados,
         'items': items
-    })  
+    })
+
+URL_ADMINISTRAR = "/administrar"
+@requiere_login
+def administrar(req):
+    return render(req, 'administracion.html', {
+        'form_trabajador': FormTrabajador(),
+        'trabajadores': Trabajador.objects.all(),
+        'productos': Producto.objects.filter(disponible=True),
+        'ventas': Pedido.objects.all()
+    })
+
+@requiere_login
+def nuevo_trabajador(req):
+    if (req.method == "POST"):
+        trab_nuevo = FormTrabajador(req.POST)
+        try:
+            Trabajador.objects.get(rut=req.POST.get("rut"))
+        except Trabajador.DoesNotExist:
+            trab_nuevo.save()
+    
+    return redirect(URL_ADMINISTRAR)
+
+@requiere_login
+def eliminar_trabajador(req, rut):
+    try:
+        Trabajador.objects.get(rut=rut).delete()
+    except:
+        ...
+    return redirect(URL_ADMINISTRAR)
+
+@requiere_login
+def eliminar_producto(req, pk):
+    try:
+        producto = Producto.objects.get(pk=pk)
+    except:
+        producto = None
+    if producto:
+        producto.disponible = False
+        producto.save()
+    return redirect(URL_ADMINISTRAR)

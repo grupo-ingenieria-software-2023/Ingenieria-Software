@@ -1,0 +1,22 @@
+form.trabajador {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    row-gap: 8px;
+    width: fit-content;
+    margin: 16px auto;
+}
+
+form.trabajador button {
+    margin: 8px auto;
+    grid-column: span 2;
+    width: fit-content;
+    padding: 4px 8px;
+}
+
+
+section.productos li {
+    margin-right: 3rem;
+}
+section.productos a {
+    float: right;
+}
